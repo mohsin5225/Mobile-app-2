@@ -62,6 +62,7 @@ function flipCard () {
       $card.children().children().toggleClass('is-active')
       switching = false
    }, cardTransitionTime / 2)
+   
 
 }
 
@@ -83,14 +84,14 @@ function nextQue (e) {
       $('#back-image').attr('src', backImage[countBack]);
       countBack = countBack + 1;
 
-   }, 100)
+   }, 50)
    setTimeout(function(){
       $body.removeClass('answer');
       $card.children().children().toggleClass('is-active')
       
       $body.removeClass('loading');
 
-   },1000)
+   },1500)
 }
 
 
@@ -119,6 +120,12 @@ $(function() {
      //Generic swipe handler for all directions
      swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
          flipCard();
+         if($('#front-image').hasClass('main')) {
+            $body.removeClass('answer')
+            $(this).removeClass('main')
+         } else {
+            $body.addClass('answer')
+         }
      }
    });
    $("#front-image").swipe( {fingers:1} );
