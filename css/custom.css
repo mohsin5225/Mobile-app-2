@@ -41,8 +41,18 @@ html {
    border: none;
 }
 .card.is-switched .card__wrapper {
-   -webkit-animation: rotate 0.5s linear both !important;
-   animation: rotate 0.5s linear both !important;
+   -webkit-animation: rotate-inverse 0.5s linear both !important;
+   animation: rotate-inverse 0.5s linear both !important;
+}
+
+.card.is-switched .card__wrapper .card__side--back {
+   -webkit-transition: 0.5s linear both !important;
+   transition: 0.5s linear both !important;
+   transform: rotateY(0);
+   -webkit-transform: rotateY(0);
+   -moz-transform: rotateY(0);
+   -ms-transform: rotateY(0);
+   -o-transform: rotateY(0);
 }
 .card__wrapper {
    -webkit-transform-style: preserve-3d;
@@ -282,6 +292,10 @@ html {
 }
 
 @media screen and (max-height: 461px){
+   body, html {
+      height: auto;
+      min-height: inherit;
+   }
    .survey-holder {
       height: auto !important;
       margin-top: 45px;
@@ -289,6 +303,10 @@ html {
    }  
 }
 @media screen and (max-width: 480px){
+   body, html {
+      height: auto;
+      min-height: inherit;
+   }
    .survey-holder {
       height: auto !important;
       margin-top: 45px;
@@ -309,11 +327,15 @@ html {
       max-width: 70px;
    }
    .survey-box {
-      max-width: 75%;
+      max-width: 70%;
       margin: 1rem auto;
    }
 }
 @media screen and (max-width: 420px) {
+   body, html {
+      height: auto;
+      min-height: inherit;
+   }
    .survey-holder {
       height: auto !important;
       margin-top: 20px;

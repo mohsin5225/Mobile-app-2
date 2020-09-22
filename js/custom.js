@@ -56,7 +56,6 @@ function flipCard () {
    }
    switching = true
 
-   $wrap.css('animation', 'rotate-inverse 0.5s linear both')
    $card.toggleClass('is-switched')
    $body.addClass('answer')
    window.setTimeout(function () {
@@ -79,24 +78,19 @@ function nextQue (e) {
    $body.removeClass('other');
    switching = false
    $card.toggleClass('is-switched')
-   setTimeout(function(){
-
-
-      $('#front-image').attr('src', frontImage[count]);
+   $('#front-image').attr('src', frontImage[count]);
       count = count + 1;
 
 
       $('#back-image').attr('src', backImage[countBack]);
       countBack = countBack + 1;
-
-   }, 50)
    setTimeout(function(){
       $body.removeClass('answer');
       $card.children().children().toggleClass('is-active')
       
       $body.removeClass('loading');
 
-   },1500)
+   },200)
 }
 
 
