@@ -103,6 +103,7 @@ function startQue () {
    $('#btn-slide').hide();
    $('#btn-question').show();
    $(this).hide();
+   $wrap.css('left', '0');
 }
 
 
