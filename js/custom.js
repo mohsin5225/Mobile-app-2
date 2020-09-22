@@ -90,7 +90,7 @@ function nextQue (e) {
       
       $body.removeClass('loading');
 
-   },600)
+   },1000)
 }
 
 
@@ -114,53 +114,40 @@ function editBoard () {
 
 /* Swapping functionality */
 
-function startSwapping () {
-   if ($(window).width() < 767) {
-      document.addEventListener('swiped-left', function(e) {
-
-         if(!$body.hasClass('answer')) {
-            flipCard();
-         } else {
-            nextQue(e);
-         }
-      });
-   }
-}
+$(function() {
+   $("#front-image").swipe( {
+     //Generic swipe handler for all directions
+     swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
+         flipCard();
+     }
+   });
+   $("#front-image").swipe( {fingers:1} );
+ });
 
 
-/* Main Slider functionality */
-
-$('.owl-carousel').owlCarousel({
-   loop:false,
-   margin:10,
-   nav:false,
-   items:1,
-})
-// document.querySelector('.flip-btn-slide').addEventListener('click', function(){
-//    $('.owl-carousel').trigger('next.owl.carousel');
-// });
+$(function() {
+   $("#back-image").swipe( {
+     //Generic swipe handler for all directions
+     swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
+         nextQue();
+     }
+   });
+   $("#back-image").swipe( {fingers:1} );
+ });
 
 
 /* When slider reaches to last slide functionality */
 
-$(".owl-carousel").on('change.owl.carousel', function(e) {
-
-   console.log(123);
-   var total = e.item.count,
-   itemsPerPage = e.page.size,
-   itemGoOut = e.item.index,
-   itemRemain = total - (itemsPerPage + itemGoOut + 1);
-
-   if(itemRemain === 0){
-      $('#btn-slide').hide();
-      $('#btn-start').show();
-      $body.addClass('ready');
-
-      /* Swipe functionality when we start quiz */
-      document.addEventListener('swiped-left', function(e) {
-         startQue();
+$(function() {
+   $("#welcome").swipe( {
+     //Generic swipe handler for all directions
+     swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
+         $('.card').addClass('d-block').removeClass('d-none');
          $('#btn-slide').hide();
+         $('#btn-question').show();
          $('#btn-start').hide();
-       });
-   }
-});
+         $(this).hide();
+     }
+   });
+   $("#welcome").swipe( {fingers:1} );
+ });

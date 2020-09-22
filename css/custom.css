@@ -24,6 +24,16 @@ html {
    display: block;
 }
 
+/* Welcome styles */
+.welcome .item {
+   pointer-events: none;
+}
+.welcome .item img {
+   width: 100%;
+   height: auto;
+   display: block;
+}
+
 /* Card Styles */
 .card {
    perspective: 600px;
@@ -171,11 +181,6 @@ html {
 .loading .card__wrapper {
    position: relative;
    left: 15px;
-}
-
-/* Splash styles */
-.welcome .owl-dots {
-   display: none;
 }
 
 /* Animations */
