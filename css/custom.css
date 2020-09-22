@@ -1,0 +1,316 @@
+* {
+   box-sizing: border-box;
+}
+body,
+html {
+   height: 100%;
+   min-height: 100%;
+}
+
+.survey-holder {
+   text-align: center;
+}
+
+/* Logo Styles */
+.survey-holder .logo {
+   max-width: 260px;
+   display: block;
+   margin: 10px auto;
+   transition: 0.3s all ease;
+}
+.survey-holder .logo img {
+   width: 100%;
+   height: auto;
+   display: block;
+}
+
+/* Card Styles */
+.card {
+   perspective: 600px;
+   position: relative;
+   border: none;
+}
+.card.is-switched .card__wrapper {
+   -webkit-animation: rotate 0.5s linear both !important;
+   animation: rotate 0.5s linear both !important;
+}
+.card__wrapper {
+   -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+   transform-style: preserve-3d;
+   position: relative;
+   left: 0;
+   transition: 0.2s all linear;
+}
+.card__side {
+   -webkit-backface-visibility: hidden;
+   backface-visibility: hidden;
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+}
+.card__side img {
+   width: 100%;
+   height: auto;
+   display: block;
+}
+.card__side.is-active {
+   position: static;
+}
+.card__side--back {
+   -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+  -ms-transform: rotateY(180deg);
+  -o-transform: rotateY(180deg);
+   transform: rotateY(180deg);
+}
+.survey-box {
+   margin: 2rem auto;
+   max-width: 300px;
+   text-align: center;
+}
+
+/* Flip Btn Styles */
+.flip-btn-que,
+.flip-btn-ans {
+   display: none;
+}
+.flip-btn-que,
+.flip-btn-ans,
+.flip-btn-slide,
+.flip-btn-start {
+   background: transparent;
+   border: none;
+   max-width: 100px;
+   padding: 0;
+   margin: 10px auto 0;
+   cursor: pointer;
+}
+.flip-btn-que:focus,
+.flip-btn-ans:focus,
+.flip-btn-slide:focus,
+.flip-btn-start:focus {
+   outline: none;
+}
+.flip-btn-que img,
+.flip-btn-ans img,
+.flip-btn-slide img,
+.flip-btn-start img {
+   width: 100%;
+   height: auto;
+   display: block;
+}
+
+/* Question Btn Styles */
+.answer #btn-question {
+   display: none !important;
+}
+
+/* Answer Btn Styles */
+#btn-answer,
+#btn-slide,
+#btn-start {
+   max-width: 58px;
+}
+.answer #btn-answer { 
+   display: block;
+}
+
+/* Start btn Styles */
+#btn-start img {
+   width: 100%;
+   height: auto;
+   display: block;
+}
+
+/* Edit Btn Styles */
+.edit {
+   position: absolute;
+   top: 50px;
+   right: 0;
+   visibility: hidden;
+   opacity: 0;
+   transition: 0.3s all ease;
+}
+.answer .edit {
+   opacity: 1;
+   visibility: visible;
+}
+.edit a {
+   display: block;
+   max-width: 100px;
+   opacity: 1;
+}
+.edit a:hover {
+   opacity: 0.6;
+}
+.edit a img {
+   width: 100%;
+   height: auto;
+   display: block;
+}
+
+/* Loading styles */
+.loading .survey-box {
+   position: relative;
+   overflow: hidden;
+}
+.loading .survey-box:after {
+   content: "";
+   position: absolute;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   background: #fff url(../image/loading-icon.gif) center no-repeat;
+   background-size: 120px;
+}
+.loading .card__wrapper {
+   position: relative;
+   left: 15px;
+}
+
+/* Splash styles */
+.welcome .owl-dots {
+   display: none;
+}
+
+/* Animations */
+@-webkit-keyframes rotate {
+   0% {
+      transform: rotateY(0);
+      -webkit-transform: rotateY(0);
+      -moz-transform: rotateY(0);
+      -ms-transform: rotateY(0);
+      -o-transform: rotateY(0);
+  }
+   70% {
+      transform: rotateY(200deg);
+      -webkit-transform: rotateY(200deg);
+      -moz-transform: rotateY(200deg);
+      -ms-transform: rotateY(200deg);
+      -o-transform: rotateY(200deg);
+  }
+   100% {
+      transform: rotateY(180deg);
+      -webkit-transform: rotateY(180deg);
+      -moz-transform: rotateY(180deg);
+      -ms-transform: rotateY(180deg);
+      -o-transform: rotateY(180deg);
+  }
+}
+@keyframes rotate {
+   0% {
+      transform: rotateY(0);
+      -webkit-transform: rotateY(0);
+      -moz-transform: rotateY(0);
+      -ms-transform: rotateY(0);
+      -o-transform: rotateY(0);
+  }
+   70% {
+      transform: rotateY(200deg);
+      -webkit-transform: rotateY(200deg);
+      -moz-transform: rotateY(200deg);
+      -ms-transform: rotateY(200deg);
+      -o-transform: rotateY(200deg);
+  }
+   100% {
+      transform: rotateY(180deg);
+      -webkit-transform: rotateY(180deg);
+      -moz-transform: rotateY(180deg);
+      -ms-transform: rotateY(180deg);
+      -o-transform: rotateY(180deg);
+  }
+}
+@keyframes rotate-inverse {
+   0% {
+      transform: rotateY(180deg);
+      -webkit-transform: rotateY(180deg);
+      -moz-transform: rotateY(180deg);
+      -ms-transform: rotateY(180deg);
+      -o-transform: rotateY(180deg);
+  }
+   70% {
+      transform: rotateY(-20deg);
+      -webkit-transform: rotateY(-20deg);
+      -moz-transform: rotateY(-20deg);
+      -ms-transform: rotateY(-20deg);
+      -o-transform: rotateY(-20deg);
+  }
+   100% {
+      transform: rotateY(0);
+      -webkit-transform: rotateY(0);
+      -moz-transform: rotateY(0);
+      -ms-transform: rotateY(0);
+      -o-transform: rotateY(0);
+  }
+}
+@-webkit-keyframes rotate-inverse {
+   0% {
+      transform: rotateY(180deg);
+      -webkit-transform: rotateY(180deg);
+      -moz-transform: rotateY(180deg);
+      -ms-transform: rotateY(180deg);
+      -o-transform: rotateY(180deg);
+  }
+   70% {
+      transform: rotateY(-20deg);
+      -webkit-transform: rotateY(-20deg);
+      -moz-transform: rotateY(-20deg);
+      -ms-transform: rotateY(-20deg);
+      -o-transform: rotateY(-20deg);
+  }
+   100% {
+      transform: rotateY(0);
+      -webkit-transform: rotateY(0);
+      -moz-transform: rotateY(0);
+      -ms-transform: rotateY(0);
+      -o-transform: rotateY(0);
+  }
+}
+
+@media screen and (max-height: 461px){
+   .survey-holder {
+      height: auto !important;
+      margin-top: 45px;
+      overflow: auto;
+   }  
+}
+@media screen and (max-width: 480px){
+   .survey-holder {
+      height: auto !important;
+      margin-top: 45px;
+      overflow: auto;
+      display: block !important;
+   }
+   .survey-holder .logo {
+      max-width: 180px;  
+   }
+   .answer .survey-holder .logo {
+      margin-left: 1rem;
+   }
+   .edit a {
+      max-width: 70px;
+   }
+   .survey-box {
+      max-width: 75%;
+      margin: 1rem auto;
+   }
+}
+@media screen and (max-width: 420px) {
+   .survey-holder {
+      height: auto !important;
+      margin-top: 20px;
+      overflow: auto;
+      display: block !important;
+   }
+   .edit {
+      position: absolute;
+      top: 30px;
+      right: 0;
+      z-index: 22;
+  }
+}
