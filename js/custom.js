@@ -83,7 +83,7 @@ function nextQue (e) {
       $('#back-image').attr('src', backImage[countBack]);
       countBack = countBack + 1;
 
-   }, 300)
+   }, 100)
    setTimeout(function(){
       $body.removeClass('answer');
       $card.children().children().toggleClass('is-active')
@@ -147,6 +147,7 @@ $(function() {
          $('#btn-question').show();
          $('#btn-start').hide();
          $(this).hide();
+         $wrap.css('left', '0');
      }
    });
    $("#welcome").swipe( {fingers:1} );
