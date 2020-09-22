@@ -90,7 +90,7 @@ function nextQue (e) {
       
       $body.removeClass('loading');
 
-   },500)
+   },800)
 }
 
 
