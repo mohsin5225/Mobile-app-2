@@ -128,6 +128,10 @@ html {
 .answer #btn-answer { 
    display: block;
 }
+.answer.loading #btn-edit,
+.answer.other #btn-edit {
+   display: none;
+}
 
 /* Start btn Styles */
 #btn-start img {
@@ -296,6 +300,10 @@ html {
    }
    .answer .survey-holder .logo {
       margin-left: 1rem;
+   }
+   .answer.loading .survey-holder .logo,
+   .answer.other .survey-holder .logo {
+      margin-left: auto;
    }
    .edit a {
       max-width: 70px;

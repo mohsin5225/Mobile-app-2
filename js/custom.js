@@ -37,6 +37,7 @@ let $body = $('body')
 let $wrap = $('.card__wrapper')
 let switching = false
 let count = 0;
+let flag = true;
 let countBack = 0;
 
 
@@ -62,7 +63,11 @@ function flipCard () {
       $card.children().children().toggleClass('is-active')
       switching = false
    }, cardTransitionTime / 2)
-   
+
+   if(flag){  
+      $body.addClass('other')
+      flag=false;
+   }
 
 }
 
@@ -71,9 +76,9 @@ function flipCard () {
 
 function nextQue (e) {
    $body.addClass('loading');
+   $body.removeClass('other');
    switching = false
    $card.toggleClass('is-switched')
-   
    setTimeout(function(){
 
 
