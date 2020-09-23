@@ -23,15 +23,8 @@ html {
    height: auto;
    display: block;
 }
-
-/* Welcome styles */
-.welcome .item {
-   pointer-events: none;
-}
-.welcome .item img {
-   width: 100%;
-   height: auto;
-   display: block;
+.item {
+   padding: 40px 10px;
 }
 
 /* Card Styles */
@@ -50,8 +43,6 @@ html {
   -ms-transform-style: preserve-3d;
   -o-transform-style: preserve-3d;
    transform-style: preserve-3d;
-   position: relative;
-   left: 20px;
    transition: 0.2s all linear;
 }
 .card__side {
@@ -78,10 +69,14 @@ html {
    transform: rotateY(180deg);
 }
 .survey-box {
-   margin: 2rem auto;
+   margin: 0 auto;
    max-width: 300px;
    text-align: center;
 }
+.survey-box .owl-dots {
+   display: none;
+}
+
 
 /* Flip Btn Styles */
 .flip-btn-que,
@@ -126,7 +121,7 @@ html {
    max-width: 58px;
 }
 .answer #btn-answer { 
-   display: block;
+   display: none;
 }
 .answer.loading #btn-edit,
 .answer.other #btn-edit {
