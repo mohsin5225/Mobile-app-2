@@ -420,7 +420,11 @@ html {
    position: absolute;
    top: 134px;
    left: 60px;
+   display: none;
    z-index: 6;
+}
+.check-show .form {
+   display: block;
 }
 .form input {
    height: 20px;
@@ -435,14 +439,14 @@ html {
    outline: none;
 }
 .form .one {
-   top: -5px;
-   left: 65px;
+   top: -8px;
+   left: 60px;
    position: relative;
    width: 58px;
 }
 .form .two {
-   top: -29px;
-   left: 132px;
+   top: -32px;
+   left: 127px;
    position: relative;
    width: 91px;
 }
@@ -450,8 +454,8 @@ html {
    letter-spacing: 9px;
 }
 .form .three {
-   top: -25px;
-   left: 66px;
+   top: -28px;
+   left: 61px;
    position: relative;
    width: 90px;
 }
@@ -459,8 +463,8 @@ html {
    letter-spacing: 9px;
 }
 .form .four {
-   top: -19px;
-   left: 65px;
+   top: -21px;
+   left: 60px;
    position: relative;
    width: 130px;
 }
@@ -468,8 +472,8 @@ html {
    letter-spacing: 9px;
 }
 .form .five {
-   top: -11px;
-   left: 65px;
+   top: -14px;
+   left: 60px;
    position: relative;
    width: 130px;
 }
@@ -477,8 +481,8 @@ html {
    letter-spacing: 9px;
 }
 .form .six {
-   top: 40px;
-   left: 3px;
+   top: 36px;
+   left: -1px;
    position: relative;
    width: 72px;
 }
@@ -486,8 +490,8 @@ html {
    letter-spacing: 14px;
 }
 .form .seven {
-   top: 16px;
-   left: 89px;
+   top: 12px;
+   left: 84px;
    position: relative;
    width: 115px;
 }
@@ -505,7 +509,7 @@ html {
     text-align: center;
     display: none;
     color: #ff0000;
-    top: 81px;
+    top: 78px;
     position: relative;
     width: 100%;
     left: 26px;
@@ -667,5 +671,8 @@ html {
       top: 30px;
       right: 0;
       z-index: 22;
+  }
+  #btn-answer, #btn-slide, #btn-start {
+     max-width: 40px;
   }
 }
