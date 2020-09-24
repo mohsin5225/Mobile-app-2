@@ -1,166 +1,158 @@
 let cardTransitionTime = 300;
-// let frontImage = ['image/cards/fronts/Card1—Front.png',
-//    'image/cards/fronts/Card2—Front.png',
-//    'image/cards/fronts/Card3—Front.png',
-//    'image/cards/fronts/Card4—Front.png',
-//    'image/cards/fronts/Card5—Front.png',
-//    'image/cards/fronts/Card6—Front.png',
-//    'image/cards/fronts/Card7—Front.png',
-//    'image/cards/fronts/Card8—Front.png',
-//    'image/cards/fronts/Card9—Front.png',
-//    'image/cards/fronts/Card10—Front.png',
-//    'image/cards/fronts/Card11—Front.png',
-//    'image/cards/fronts/Card12—Front.png',
-//    'image/cards/fronts/Card13—Front.png',
-//    'image/cards/fronts/Card14—Front.png',
-//    'image/cards/fronts/Card15—Front.png',
-// ];
-// let backImage = ['image/cards/backs/Card1—Back.png',
-//    'image/cards/backs/Card2—Back.png' ,
-//    'image/cards/backs/Card3—Back.png' ,
-//    'image/cards/backs/Card4—Back.png' ,
-//    'image/cards/backs/Card5—Back.png' ,
-//    'image/cards/backs/Card6—Back.png' ,
-//    'image/cards/backs/Card7—Back.png' ,
-//    'image/cards/backs/Card8—Back.png' ,
-//    'image/cards/backs/Card9—Back.png' ,
-//    'image/cards/backs/Card10—Back.png' ,
-//    'image/cards/backs/Card11—Back.png' ,
-//    'image/cards/backs/Card12—Back.png' ,
-//    'image/cards/backs/Card13—Back.png' ,
-//    'image/cards/backs/Card14—Back.png' ,
-//    'image/cards/backs/Card15—Back.png' ,
-// ];
-
-let $card = $('.js-card')
+let $card = $('.demo__card__top')
 let $body = $('body')
-// let $wrap = $('.card__wrapper')
-let switching = false
-// let count = 0;
-// let flag = true;
-// let countBack = 0;
+let $last = false;
+let $check = $('.check');
+let $form = $('#form');
 
 
-// // $('#btn-start').hide();
-$('#btn-question').click(flipCard)
-// $('#btn-edit').click(editBoard)
-$('#btn-start').click(startQue);
-$('#btn-answer').click(nextQue);
+$check.click(markCheck);
 
+function markCheck () {
+    if($(this).parent().hasClass('check-show')){
+        $(this).addClass('checked');
+    }
+}
+
+
+$form.submit(formSubmit);
+
+function formSubmit (e) {
+    let one = document.querySelector('.one input').value;
+    let two = document.querySelector('.two input').value;
+    let three = document.querySelector('.three input').value;
+    let four = document.querySelector('.four input').value;
+    let five = document.querySelector('.five input').value;
+    let six = document.querySelector('.six input').value;
+    let seven = document.querySelector('.seven input').value;
+
+    e.preventDefault();
+    $('input[type="text"]').each(function() {
+        if ($(this).val() == '') {   
+            $(".alert").show();
+        } else {
+            $(".alert").hide();
+        }
+    });
+}
 
 
 // /* Flip functionality */
-function flipCard () {
-   if (switching) {
-      return false
-   }
-   switching = true
+function flipCard() {
 
-   $card.toggleClass('is-switched')
-   $('#btn-answer').show().addClass('slide-btn-2');
-   $body.addClass('answer')
-   window.setTimeout(function () {
-      $card.children().children().toggleClass('is-active')
-      switching = false
-   }, cardTransitionTime / 2)
+
+    $(this).parent().addClass('check-show')
+    $(this).prev().prev().addClass('is-switched')
+    window.setTimeout(function () {
+        $card.children().children().toggleClass('is-active')
+        if ($last) {
+            $("#btn-start").hide();
+            $("#btn-question").hide();
+        } else {
+            $("#btn-start").show();
+            $("#btn-question").hide();
+        }
+
+    }, cardTransitionTime / 2)
 }
-
-
-
-// /* Next Question functionality */
-
-function nextQue (e) {
-   flipCard();
-   $(this).hide();
-   $body.removeClass('answer');
-   $('#btn-question').show();
-}
-
-
-// /* Start Quiz/Question functionality */
-
-function startQue () {
-   $(this).hide();
-   $('#btn-question').show();
-}
-
-
-// /* Edit Button functionality */
-
-// function editBoard () {
-//    alert();
-// }
-
 
 // /* Swapping functionality */
 
-$(function() {
-   $("#front-image").swipe( {
-     //Generic swipe handler for all directions
-     swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
-         flipCard();
-         $('btn-start').hide();
-     }
-   });
-   $("#front-image").swipe( {fingers:1} );
- });
+$(document).ready(function () {
 
- $(function() {
-   $(".main-image").swipe( {
-     //Generic swipe handler for all directions
-     swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
-         $('#btn-start').hide();
-         $('#btn-question').show();
-         $('.owl-carousel').trigger('next.owl.carousel');
-     }
-   });
-   $("#front-image").swipe( {fingers:1} );
- });
+    var animating = false;
+    var cardsCounter = 0;
+    var numOfCards = 16;
+    var decisionVal = 80;
+    var pullDeltaX = 0;
+    var deg = 0;
+    var $card, $cardReject, $cardLike;
+
+    function pullChange() {
+        animating = true;
+        deg = pullDeltaX / 10;
+        $card.css("transform", "translateX(" + pullDeltaX + "px) rotate(" + deg + "deg)");
+
+        var opacity = pullDeltaX / 100;
+        var rejectOpacity = (opacity >= 0) ? 0 : Math.abs(opacity);
+        var likeOpacity = (opacity <= 0) ? 0 : opacity;
+        $cardReject.css("opacity", rejectOpacity);
+        $cardLike.css("opacity", likeOpacity);
+    }
+    ;
+
+    function release() {
+
+        if (pullDeltaX >= decisionVal) {
+            $card.addClass("to-right");
+        } else if (pullDeltaX <= -decisionVal) {
+            $card.addClass("to-left");
+        }
+
+        if (Math.abs(pullDeltaX) >= decisionVal) {
+            $card.addClass("inactive");
+
+            setTimeout(function () {
+                $card.addClass("below").removeClass("inactive to-left to-right");
+                cardsCounter++;
+                if (cardsCounter === numOfCards) {
+                    cardsCounter = 0;
+                    $(".demo__card").removeClass("below");
+                }
+                $("#btn-question").show();
+                $("#btn-start").hide();
+            }, 300);
+        }
+
+        if (Math.abs(pullDeltaX) < decisionVal) {
+            $card.addClass("reset");
+        }
+
+        setTimeout(function () {
+            $card.attr("style", "").removeClass("reset")
+                    .find(".demo__card__choice").attr("style", "");
+
+            pullDeltaX = 0;
+            animating = false;
+
+        }, 300);
+    }
+    ;
+
+    $(document).on("mousedown touchstart", ".demo__card:not(.inactive)", function (e) {
+        if (animating)
+            return;
+        if ($(this).hasClass('last'))
+        {
+            $last = true;
+        }
+        if ($('#btn-question').is(":visible")) {
+            $(".demo__card__drag").unbind('click').bind('click', flipCard);
+        } else {
+            $(".demo__card__drag").unbind('click');
+            $card = $(this);
+            $cardReject = $(".demo__card__choice.m--reject", $card);
+            $cardLike = $(".demo__card__choice.m--like", $card);
+            var startX = e.pageX || e.originalEvent.touches[0].pageX;
+
+            $(document).on("mousemove touchmove", function (e) {
+                var x = e.pageX || e.originalEvent.touches[0].pageX;
+                pullDeltaX = (x - startX);
+                if (!pullDeltaX)
+                    return;
+                pullChange();
+            });
+
+            $(document).on("mouseup touchend", function () {
+                $(document).off("mousemove touchmove mouseup touchend");
+                if (!pullDeltaX)
+                    return; // prevents from rapid click events
+                release();
+
+            });
+        }
 
 
-$(function() {
-   $("#back-image").swipe( {
-     //Generic swipe handler for all directions
-     swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
-         flipCard();
-         $body.removeClass('answer');
-         $('#btn-question').show();
-         $('.owl-carousel').trigger('next.owl.carousel');
+    });
 
-     }
-   });
-   $("#back-image").swipe( {fingers:1} );
- });
-
-
-// /* When slider reaches to last slide functionality */
-
-// $(function() {
-//    $("#welcome").swipe( {
-//      //Generic swipe handler for all directions
-//      swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
-//          $('.card').addClass('d-block').removeClass('d-none');
-//          $('#btn-slide').hide();
-//          $('#btn-question').show();
-//          $('#btn-start').hide();
-//          $(this).hide();
-//          $wrap.css('left', '0');
-//      }
-//    });
-//    $("#welcome").swipe( {fingers:1} );
-//  });
-
-
- /* Owl Carousel */
- $('.owl-carousel').owlCarousel({
-   loop:false,
-   margin:10,
-   nav:false,
-   items:1,
-})
-document.querySelector('.slide-btn').addEventListener('click', function(){
-   $('.owl-carousel').trigger('next.owl.carousel');
-});
-document.querySelector('.slide-btn-2').addEventListener('click', function(){
-   $('.owl-carousel').trigger('next.owl.carousel');
 });

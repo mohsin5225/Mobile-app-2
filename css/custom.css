@@ -5,6 +5,9 @@ body,
 html {
    height: 100%;
    min-height: 100%;
+   overflow-x: hidden;
+   overflow-y: hidden;
+   position: relative;
 }
 
 .survey-holder {
@@ -15,7 +18,7 @@ html {
 .survey-holder .logo {
    max-width: 260px;
    display: block;
-   margin: 10px auto;
+   margin: 10px auto 20px;
    transition: 0.3s all ease;
 }
 .survey-holder .logo img {
@@ -28,16 +31,16 @@ html {
 }
 
 /* Card Styles */
-.card {
+.demo__card__top {
    perspective: 600px;
    position: relative;
    border: none;
 }
-.card.is-switched .card__wrapper {
+.demo__card__top.is-switched .demo_wrapper {
    -webkit-animation: rotate-inverse 0.5s linear both !important;
    animation: rotate-inverse 0.5s linear both !important;
 }
-.card__wrapper {
+.demo_wrapper {
    -webkit-transform-style: preserve-3d;
   -moz-transform-style: preserve-3d;
   -ms-transform-style: preserve-3d;
@@ -45,7 +48,7 @@ html {
    transform-style: preserve-3d;
    transition: 0.2s all linear;
 }
-.card__side {
+.demo__card__img {
    -webkit-backface-visibility: hidden;
    backface-visibility: hidden;
    position: absolute;
@@ -53,36 +56,125 @@ html {
    left: 0;
    width: 100%;
 }
-.card__side img {
+.demo__card__img img {
    width: 100%;
    height: auto;
    display: block;
 }
-.card__side.is-active {
+.demo__card__img.is-active {
    position: static;
 }
-.card__side--back {
+.card_back {
    -webkit-transform: rotateY(180deg);
   -moz-transform: rotateY(180deg);
   -ms-transform: rotateY(180deg);
   -o-transform: rotateY(180deg);
    transform: rotateY(180deg);
 }
-.survey-box {
-   margin: 0 auto;
-   max-width: 300px;
+
+ .demo__content {
+   overflow: hidden;
+   position: relative;
+   height: 460px;
+   -webkit-user-select: none;
+      -moz-user-select: none;
+       -ms-user-select: none;
+           user-select: none;
+ }
+ .demo__card-cont {
+   position: relative;
+   width: 300px;
+   margin: 0 auto 5rem;
+ }
+ .demo__card {
+   z-index: 2;
+   position: absolute;
+   left: 0;
+   top: 0;
+   width: 100%;
+   -webkit-transform-origin: 50% 100%;
+           transform-origin: 50% 100%;
+ }
+ .demo__card.reset {
+   -webkit-transition: -webkit-transform 0.3s;
+   transition: -webkit-transform 0.3s;
+   transition: transform 0.3s;
+   transition: transform 0.3s, -webkit-transform 0.3s;
+   -webkit-transform: translateX(0) !important;
+           transform: translateX(0) !important;
+ }
+ .demo__card.reset .demo__card__choice {
+   -webkit-transition: opacity 0.3s;
+   transition: opacity 0.3s;
+   opacity: 0 !important;
+ }
+ .demo__card.inactive {
+   -webkit-transition: -webkit-transform 0.3s;
+   transition: -webkit-transform 0.3s;
+   transition: transform 0.3s;
+   transition: transform 0.3s, -webkit-transform 0.3s;
+ }
+ .demo__card.to-left {
+   -webkit-transform: translateX(-30rem) rotate(-30deg) !important;
+           transform: translateX(-30rem) rotate(-30deg) !important;
+ }
+ .demo__card.to-right {
+   -webkit-transform: translate(30rem) rotate(30deg) !important;
+           transform: translate(30rem) rotate(30deg) !important;
+ }
+ .demo__card.below {
+   z-index: 1;
+ }
+ .demo__card__name {
    text-align: center;
-}
-.survey-box .owl-dots {
-   display: none;
-}
+   font-size: 2rem;
+   font-weight: bold;
+   color: #fff;
+ }
+ .demo__card__we {
+   text-align: center;
+   font-size: 2.2rem;
+   line-height: 11.5rem;
+ }
+ .demo__card__img img {
+   width: 100%;
+   height: auto;
+   display: block;
+ }
+ .demo__card__choice {
+   position: absolute;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+   opacity: 0;
+ }
+ .demo__card__choice.m--reject {
+   background: #444;
+ }
+ .demo__card__choice.m--like:after {
+   -webkit-transform: scaleY(-1);
+           transform: scaleY(-1);
+ }
+ .demo__card__drag {
+   z-index: 5;
+   position: absolute;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+   cursor: -webkit-grab;
+   cursor: grab;
+ }
+ .demo__tip {
+   text-align: center;
+   font-size: 2.2rem;
+ }
+ 
 
 
 /* Flip Btn Styles */
-.flip-btn-que,
-.flip-btn-ans {
-   display: none;
-}
+.flip-btn-start{display: none;}
 .flip-btn-que,
 .flip-btn-ans,
 .flip-btn-slide,
@@ -180,6 +272,243 @@ html {
 .loading .card__wrapper {
    position: relative;
    left: 15px;
+}
+
+/* check */
+.check {
+   position: absolute;
+   width: 25%;
+   height: 20px;
+   z-index: 6;
+   cursor: pointer;
+   display: none;
+}
+.check.checked {
+   transform: none;
+}
+.check-one.checked {
+   background: url("../image/check.png") no-repeat;
+   background-size: 15px;
+   background-position: 7px -1px;
+}
+.check-two.checked {
+   background: url("../image/check.png") no-repeat;
+   background-size: 15px;
+   background-position: 5px -2px;
+}
+.check-three.checked {
+   background: url("../image/check-black.png") no-repeat;
+   background-position: 6px 2px;
+   background-size: 17px;
+}
+.check-four.checked {
+   background: url("../image/check-black.png") no-repeat;
+   background-size: 17px;
+   background-position: 4px 1px;
+}
+.check-five.checked {
+   background: url("../image/check.png") no-repeat;
+   background-size: 15px;
+   background-position: 5px -3px;
+}
+.check-six.checked {
+   background: url("../image/check.png") no-repeat;
+   background-size: 15px;
+   background-position: 5px -1px;
+}
+.check-seven.checked {
+   background: url(../image/check-black.png) no-repeat;
+   background-size: 18px;
+   background-position: 5px 3px;
+}
+.check-eight.checked {
+   background: url(../image/check.png) no-repeat;
+   background-size: 15px;
+   background-position: 3px 1px;
+}
+.check-nine.checked {
+   background: url(../image/check-black.png) no-repeat;
+   background-size: 18px;
+   background-position: 5px -1px;
+}
+.check-ten.checked {
+   background: url(../image/check-black.png) no-repeat;
+   background-size: 19px;
+   background-position: 3px 1px;
+}
+.check-eleven.checked {
+   background: url(../image/check-black.png) no-repeat;
+   background-size: 19px;
+   background-position: -2px -1px;
+}
+.check-twelve.checked {
+   background: url(../image/check-black.png) no-repeat;
+   background-size: 19px;
+   background-position: 0px -1px;
+}
+.check-thirteen.checked {
+   background: url(../image/check.png) no-repeat;
+   background-size: 15px;
+   background-position: 6px 0px;
+}
+.check-fourteen.checked {
+   background: url(../image/check-black.png) no-repeat;
+   background-size: 18px;
+   background-position: 4px -1px;
+}
+.check-show .check {
+   display: block;
+}
+.check-one {
+   bottom: 95px;
+   left: 20px;
+}
+.check-two {
+   bottom: 102px;
+   left: 45px;
+}
+.check-three {
+   bottom: 70px;
+   right: 25px;
+}
+.check-four {
+   bottom: 55px;
+   left: 20px;
+}
+.check-five {
+   bottom: 122px;
+   right: 13px;
+}
+.check-six {
+   bottom: 75px;
+   right: 20px;
+}
+.check-seven {
+   bottom: 83px;
+   right: 20px;
+}
+.check-eight {
+   bottom: 99px;
+   left: 30px;
+}
+.check-nine {
+   bottom: 79px;
+   left: 68px;
+}
+.check-ten {
+   bottom: 80px;
+   left: 30px;
+}
+.check-eleven {
+   bottom: 95px;
+   left: 20px;
+}
+.check-twelve {
+   bottom: 125px;
+   left: 16px;
+}
+.check-thirteen {
+   bottom: 115px;
+   left: 25px;
+}
+.check-fourteen {
+   bottom: 50px;
+   right: 60px;
+}
+
+.form {
+   position: absolute;
+   top: 134px;
+   left: 60px;
+   z-index: 6;
+}
+.form input {
+   height: 20px;
+   font-size: 12px;
+   text-transform: uppercase;
+   letter-spacing: 9px;
+   background: transparent;
+   border: none;
+   width: 100%;
+}
+.form input:focus {
+   outline: none;
+}
+.form .one {
+   top: -5px;
+   left: 65px;
+   position: relative;
+   width: 58px;
+}
+.form .two {
+   top: -29px;
+   left: 132px;
+   position: relative;
+   width: 91px;
+}
+.form .two input {
+   letter-spacing: 9px;
+}
+.form .three {
+   top: -25px;
+   left: 66px;
+   position: relative;
+   width: 90px;
+}
+.form .three input {
+   letter-spacing: 9px;
+}
+.form .four {
+   top: -19px;
+   left: 65px;
+   position: relative;
+   width: 130px;
+}
+.form .four input {
+   letter-spacing: 9px;
+}
+.form .five {
+   top: -11px;
+   left: 65px;
+   position: relative;
+   width: 130px;
+}
+.form .five input {
+   letter-spacing: 9px;
+}
+.form .six {
+   top: 40px;
+   left: 3px;
+   position: relative;
+   width: 72px;
+}
+.form .six input {
+   letter-spacing: 14px;
+}
+.form .seven {
+   top: 16px;
+   left: 89px;
+   position: relative;
+   width: 115px;
+}
+.form .seven input {
+   letter-spacing: 14px;
+}
+.form .button {
+   position: relative;
+   top: 81px;
+   left: 22px;
+}
+.form .alert {
+   padding: 0;
+    font-size: 12px;
+    text-align: center;
+    display: none;
+    color: #ff0000;
+    top: 81px;
+    position: relative;
+    width: 100%;
+    left: 26px;
 }
 
 /* Animations */
@@ -284,7 +613,9 @@ html {
    .survey-holder {
       height: auto !important;
       margin-top: 45px;
-      overflow: auto;
+      overflow-x: hidden;
+      overflow-y: hidden;
+      position: relative;
    }  
 }
 @media screen and (max-width: 480px){
@@ -295,7 +626,9 @@ html {
    .survey-holder {
       height: auto !important;
       margin-top: 45px;
-      overflow: auto;
+      overflow-x: hidden;
+      overflow-y: hidden;
+      position: relative;
       display: block !important;
    }
    .survey-holder .logo {
@@ -312,8 +645,8 @@ html {
       max-width: 70px;
    }
    .survey-box {
-      max-width: 70%;
-      margin: 1rem auto;
+      max-width: 100%;
+      margin: 0 auto;
    }
 }
 @media screen and (max-width: 420px) {
@@ -323,8 +656,10 @@ html {
    }
    .survey-holder {
       height: auto !important;
-      margin-top: 20px;
-      overflow: auto;
+      margin-top: 10px;
+      overflow-x: hidden;
+      overflow-y: hidden;
+      position: relative;
       display: block !important;
    }
    .edit {
